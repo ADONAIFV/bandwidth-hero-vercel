@@ -1,0 +1,34 @@
+{
+  "name": "bandwidth-hero-proxy",
+  "version": "1.0.1",
+  "description": "Data compression service that converts images to low-res WebP or JPEG on the fly. Used in Bandwidth-Hero browser extension.",
+  "type": "module",
+  "author": "Anatoliy Yastreb",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/repo"
+  },
+  "packageManager": "pnpm@10.7.1",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "basic-auth": "^2.0.1",
+    "sanitize-filename": "^1.6.3",
+    "express": "^5.1.0",
+    "got": "^14.4.7",
+    "http2-wrapper": "^2.2.1",
+    "is-animated": "^2.0.2",
+    "sharp": "^0.34.1",
+    "lzma-native": "^8.0.6",
+    "zstd-codec": "^0.1.5",
+    "validator": "^13.15.0",
+    "morgan": "^1.10.0",
+    "helmet": "^8.1.0",
+    "dotenv": "^16.4.7"
+  },
+  "engines": {
+    "node": "22.x"
+  }
+}
