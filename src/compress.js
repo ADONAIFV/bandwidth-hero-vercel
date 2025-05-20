@@ -53,35 +53,9 @@ async function compress(req, res, input) {
 }
 
 function getCompressionParams(req) {
-    let determinedFormat;
-
-    if (req.params?.format) { // Primero, respetar un parámetro explícito ?format=algo
-        determinedFormat = String(req.params.format).toLowerCase();
-        const validExplicitFormats = ['webp', 'jpeg', 'png', 'avif', 'gif'];
-        if (!validExplicitFormats.includes(determinedFormat)) {
-            logError(`Formato explícito no soportado: '${determinedFormat}', usando webp.`); // Necesitas tener logError definida o quitar esta línea si no la tienes global
-            determinedFormat = 'webp';
-        }
-    } else if (req.params?.avif !== undefined) {
-        determinedFormat = 'avif';
-    } else if (req.params?.jpeg !== undefined || req.params?.jpg !== undefined) {
-        determinedFormat = 'jpeg';
-    } else if (req.params?.png !== undefined) {
-        determinedFormat = 'png';
-    } else if (req.params?.gif !== undefined) {
-        determinedFormat = 'gif';
-    }
-    // Si ninguna de las condiciones anteriores se cumplió
-    // y determinedFormat sigue sin un valor asignado, entonces es el caso por defecto.
-    else {
-        determinedFormat = 'webp'; // PREDETERMINADO
-    }
-
-    const format = determinedFormat; // Se usa la variable 'format' como antes
-
+    const format = req.params?.webp ? 'avif' : 'jpeg';
     const compressionQuality = Math.min(Math.max(parseInt(req.params?.quality, 10) || 75, 10), 100);
-    // Para grayscale, es más robusto convertir a string y luego a minúsculas antes de comparar:
-    const grayscale = String(req.params?.grayscale).toLowerCase() === 'true'; 
+    const grayscale = req.params?.grayscale === 'true' || req.params?.grayscale === true;
     return { format, compressionQuality, grayscale };
 }
 
